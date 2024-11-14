@@ -7,7 +7,7 @@ function Header({ name }) {
   // console.log(date);
   return (
     <>
-      <div className="flex justify-between pr-20 items-center">
+      <div className="flex justify-between items-center">
         <div className="greetings">
           <h1 className="text-3xl">Hello, {name} </h1>
           <h2 className="text-xl opacity-45">Today, {`${date}`}</h2>
