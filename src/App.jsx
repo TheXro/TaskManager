@@ -1,44 +1,51 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "./App.css";
-import Header from "./components/Header";
-import SearchBar from "./components/SearchBar";
-import TaskForm from "./components/TaskForm";
-import TaskList from "./components/TaskList";
+import Header from "./components/ui/Header";
+import SearchBar from "./components/ui/SearchBar";
+import TaskList from "./components/Task/TaskList";
 import { TaskContext } from "./context/TaskContext";
 
 function App() {
-  const { tasks, setTasks } = useContext(TaskContext);
-  const [filterTasks, setFilterTasks] = useState([]);
-  const [search, setSearch] = useState("");
-  const handleSearch = (e) => {
-    const search = e.target.value;
-    setSearch(search);
-    const filteredTasks = tasks.filter((task) => {
-      return (
+  const { tasks } = useContext(TaskContext); // Access tasks from context
+  const [filter, setFilter] = useState("All"); // Current filter option
+  const [search, setSearch] = useState(""); // Search input value
+
+  // Filter and search tasks dynamically
+  const filteredTasks = tasks.filter((task) => {
+    // Apply filter
+    if (filter !== "All" && task.priority !== filter) return false;
+
+    // Apply search
+    if (
+      search &&
+      !(
         task.title.toLowerCase().includes(search.toLowerCase()) ||
         task.description.toLowerCase().includes(search.toLowerCase())
-      );
-    });
-    setFilterTasks(filteredTasks);
+      )
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+
+  const handleFilter = (item) => {
+    setFilter(item); // Update filter value
   };
-  // console.log(filterTasks);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value); // Update search value
+  };
+
   return (
-    <>
-      <div className="px-2 py-2  md:px-32 md:py-8">
-        <h1 className="text-4xl font-bold ">Task Manager</h1>
-        <div className=" ">
-          <div className="bg-[#eee0] my-8 p-6 rounded-2xl border-2 shadow-[3px_3px_#000000] ">
-            <Header name={"User"} />
-            <SearchBar handleSearch={handleSearch} />
-            <TaskList
-              filteredTasks={filterTasks}
-              setFilterTasks={setFilterTasks}
-              search={search}
-            />
-          </div>
-        </div>
+    <div className="px-2 py-2 md:px-32 md:py-8">
+      <h1 className="text-4xl font-bold">Task Manager</h1>
+      <div className="bg-[#eee0] my-8 p-6 rounded-2xl border-2 shadow-[3px_3px_#000000]">
+        <Header name={"User"} />
+        <SearchBar handleSearch={handleSearch} handleFilter={handleFilter} />
+        <TaskList filteredTasks={filteredTasks} />
       </div>
-    </>
+    </div>
   );
 }
 

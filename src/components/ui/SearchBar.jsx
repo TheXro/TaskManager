@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
-import { TaskContext } from "../context/TaskContext";
+import { TaskContext } from "../../context/TaskContext";
 import Sort from "./Sort";
 
-function SearchBar({ handleSearch }) {
+function SearchBar({ handleSearch, handleFilter }) {
   
   const { tasks, setTasks } = useContext(TaskContext);
   // console.log(tasks);
@@ -19,7 +19,7 @@ function SearchBar({ handleSearch }) {
           onChange={handleSearch}
         />
       </div>
-      <Sort />
+      <Sort handleFilter={handleFilter} />
     </div>
   );
 }

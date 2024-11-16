@@ -17,7 +17,7 @@ function TaskItem({ task, deleteTask, markDone, changePriority }) {
 
         >
           {task.title}
-          {/* <p className="text-[#aaa] text-wrap">{task.description}</p> */}
+          <p className="text-[#aaa] text-wrap text-sm">{task.description}</p>
           
         </div>
         <div className="flex text-sm justify-evenly items-center gap-3">
