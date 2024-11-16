@@ -10,7 +10,7 @@ function TaskForm({setForm}) {
   const [priority, setPriority] = useState("");
 
   const task = {
-    id: tasks.length + 1,
+    id: tasks.length * Math.random(),
     title,
     description,
     status : status || "To Do",
