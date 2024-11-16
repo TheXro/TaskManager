@@ -32,7 +32,9 @@ A simple task management application built with React.
 
 2. **Managing Tasks:**
    - Tasks can be marked as Done and , searched by title or description and filtered by priority.
+   - Tasks priority can be changed by clicking on the priority button.
    - Tasks can also be deleted, with changes instantly reflected in the local storage.
+
 
 3. **Data Persistence:**
    - Tasks are saved in the local storage upon any changes, ensuring they remain available even after a page reload.
