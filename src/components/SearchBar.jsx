@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
 import { TaskContext } from "../context/TaskContext";
 import Sort from "./Sort";
 
-function SearchBar() {
+function SearchBar({ handleSearch }) {
   
   const { tasks, setTasks } = useContext(TaskContext);
-  console.log(tasks);
- 
+  // console.log(tasks);
+  // const [filterTasks, setFilterTasks] = useState(tasks);
   return (
     <div className="py-6 flex justify-between">
       <div className="flex items-center border-2 p-2 rounded-2xl bg-white shadow-[3px_3px_#000000] md:w-[60%]">
@@ -16,6 +16,7 @@ function SearchBar() {
           type="text"
           className="w-full bg-transparent outline-none px-2"
           placeholder="Start Searching . . . "
+          onChange={handleSearch}
         />
       </div>
       <Sort />

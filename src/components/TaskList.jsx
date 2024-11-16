@@ -4,7 +4,7 @@ import { HiOutlinePlus, HiPlus } from "react-icons/hi2";
 import TaskForm from "./TaskForm";
 import { TaskContext, TaskProvider } from "../context/TaskContext";
 
-function TaskList() {
+function TaskList({ filteredTasks, setFilterTasks, search }) {
   const { tasks, setTasks } = useContext(TaskContext);
   const [showForm, setShowForm] = useState(false);
   const handleForm = () => {
@@ -13,18 +13,53 @@ function TaskList() {
 
   const deleteTask = (id) => {
     const newtasks = tasks.filter((task) => task.id != id);
+    const newfilteredTasks = filteredTasks.filter((task) => task.id != id);
     console.log(newtasks);
     setTasks(newtasks);
+    setFilterTasks(newfilteredTasks);
   };
 
   // console.log(tasks);
+  // console.log(filteredTasks);
+
+  //marking tasks done
+  const markDone = (id) => {
+    const newtasks = tasks.map((task) => {
+      if (task.id === id) {
+        task.status === "Done"
+          ? (task.status = "To Do")
+          : (task.status = "Done");
+      }
+      // console.log(task.status);
+      return task;
+    });
+    setTasks(newtasks);
+  };
+
+  //changing priority
+  const changePriority = (id) => {
+    const newtasks = tasks.map((task) => {
+      if (task.id === id) {
+        task.priority === "High"
+          ? (task.priority = "Low")
+          : task.priority === "Low"
+          ? (task.priority = "Medium")
+          : (task.priority = "High");
+      }
+      return task;
+    });
+    setTasks(newtasks);
+  };
+
   return (
     <div className="">
-      {tasks
-        ? tasks.map((task, index) => {
-            return <TaskItem key={index} task={task} deleteTask={deleteTask} />;
+      {search
+        ? filteredTasks.map((task, index) => {
+            return <TaskItem key={index} task={task} deleteTask={deleteTask} markDone={markDone} changePriority={changePriority} />;
           })
-        : null}
+        : tasks.map((task, index) => {
+            return <TaskItem key={index} task={task} deleteTask={deleteTask} markDone={markDone} changePriority={changePriority} />;
+      })}
       <div
         className="bg-white text-black px-4 py-2 rounded-2xl w-fit flex items-center gap-2 cursor-pointer border-2 duration-150  active:shadow-none shadow-[3px_3px_#000] "
         onClick={handleForm}
@@ -38,7 +73,7 @@ function TaskList() {
             onClick={handleForm}
           ></div>
           <div className="absolute top-[30vh]  ">
-            <TaskForm />
+            <TaskForm setForm={setShowForm} />
           </div>
         </div>
       ) : null}

@@ -14,7 +14,7 @@ const initialTasks = [
     id: 2,
     title: "Task 2",
     description: "Description 2",
-    status: "Completed",
+    status: "Done",
     priority: "Medium",
   },
   {
@@ -39,7 +39,7 @@ export const TaskProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (tasks.length > 0) {
+    if (tasks.length >= 0) {
       localStorage.setItem("tasks", JSON.stringify(tasks));
     }
   }, [tasks]);

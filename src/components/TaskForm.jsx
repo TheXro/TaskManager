@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { HiOutlinePlus } from "react-icons/hi2";
+import { TaskContext } from "../context/TaskContext";
 
-function TaskForm() {
+function TaskForm({setForm}) {
+  const { tasks, setTasks } = useContext(TaskContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
   const [priority, setPriority] = useState("");
 
   const task = {
+    id: tasks.length + 1,
     title,
     description,
-    status,
-    priority,
+    status : status || "To Do",
+    priority : priority || "Medium",
   };
+  // console.log(tasks);
 
   const handlePriorityChange = (e) => {
     setPriority(e.target.value);
@@ -22,25 +26,28 @@ function TaskForm() {
     setStatus(e.target.value);
   };
 
-  // console.log(task);
   const handleSubmit = (e) => {
     e.preventDefault();
-    title || description || status || priority ? console.log(task) : console.log("Please fill all the fields");
+    if (title === "" || description === "") {
+      alert("Please fill all the fields");
+      return;
+    }
+    setTasks([task, ...tasks]) 
+    setForm(false)
   };
-
 
   return (
     <div className="bg-transparent flex justify-center items-center ">
-      <form
-        className="w-[500px] flex gap-4 flex-col border-[#111] bg-white border-2 rounded-xl p-4 shadow-[3px_3px_#000000] "
-      >
+      <form onSubmit={handleSubmit} className="w-[500px] flex gap-4 flex-col border-[#111] bg-white border-2 rounded-xl p-4 shadow-[3px_3px_#000000] ">
         <input
+          autoFocus={true}
           type="text"
           name="title"
           placeholder="Enter Task Title"
           className="outline-none text-3xl font-bold"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
         <textarea
           type="text"
@@ -49,6 +56,7 @@ function TaskForm() {
           className="outline-none text-lg resize-none"
           rows={1}
           value={description}
+          required
           onChange={(e) => setDescription(e.target.value)}
         />
         {/* <button>Add Task</button> */}
@@ -75,7 +83,7 @@ function TaskForm() {
               id="Medium"
               onChange={handlePriorityChange}
             />
-            <label htmlFor=" Medium " className="pl-1">
+            <label htmlFor="Medium" className="pl-1">
               Medium
             </label>
           </div>
@@ -113,7 +121,7 @@ function TaskForm() {
               type="radio"
               name="status"
               value="Done"
-              id="Done" 
+              id="Done"
               onChange={handleStatusChange}
             />
             <label htmlFor="Done" className="pl-1">
@@ -133,12 +141,13 @@ function TaskForm() {
             </label>
           </div>
         </div>
-        <div
+        <button
+          type="submit"
           className="bg-white text-black px-4 py-2 rounded-lg w-fit flex items-center gap-2 cursor-pointer border-2 duration-150  active:shadow-none shadow-[3px_3px_#000]"
           onClick={handleSubmit}
         >
           <HiOutlinePlus className="text-xl" /> Add
-        </div>
+        </button>
       </form>
     </div>
   );
