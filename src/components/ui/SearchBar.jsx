@@ -9,7 +9,7 @@ function SearchBar({ handleSearch, handleFilter }) {
   // console.log(tasks);
   // const [filterTasks, setFilterTasks] = useState(tasks);
   return (
-    <div className="py-6 flex justify-between">
+    <div className="py-6 flex justify-between md:flex-row flex-col gap-4">
       <div className="flex items-center border-2 p-2 rounded-2xl bg-white shadow-[3px_3px_#000000] md:w-[60%]">
         <HiOutlineMagnifyingGlass className="text-2xl opacity-50" />
         <input

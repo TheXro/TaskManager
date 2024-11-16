@@ -12,7 +12,7 @@ function TaskItem({ task, deleteTask, markDone, changePriority }) {
         }  `}
       >
         <div
-          className="flex flex-col text-xl w-2/3  justify-center text-wrap cursor-pointer" 
+          className="flex flex-col text-xl w-1/2   justify-center text-wrap cursor-pointer" 
         onClick={() => markDone(task.id)}
 
         >

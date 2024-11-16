@@ -20,13 +20,13 @@ function Sort({handleFilter}) {
     setSelected(item);
   };
   return (
-    <div className="flex gap-4 justify-evenly  items-center border-2 p-2 rounded-2xl bg-white shadow-[3px_3px_#000000]">
+    <div className="flex  md:gap-4 justify-between  items-center border-2 p-2 rounded-2xl bg-white shadow-[3px_3px_#000000]">
       <HiOutlineFunnel className="text-2xl opacity-50" />
       {sort.map((item, index) => (
         <button
           key={index}
           onClick={() => handleSelect(item)}
-          className={`px-2 py-1 rounded-lg hover:bg-black  hover:text-white ${
+          className={`md:px-2 px-2 p-1 md:py-1 rounded-lg hover:bg-black  hover:text-white ${
             selected === item ? "bg-black text-white" : "bg-white text-black"
             }`}
         >
