@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <TaskProvider>
-        <div className="px-2 py-2  md:px-80 md:py-8">
+        <div className="px-2 py-2  md:px-32 md:py-8">
           <h1 className="text-4xl font-bold ">Task Manager</h1>
           <div className=" ">
             <div className="bg-[#eee0] my-8 p-6 rounded-2xl border-2 shadow-[3px_3px_#000000] ">

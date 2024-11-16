@@ -25,7 +25,7 @@ function TaskForm() {
   // console.log(task);
   const handleSubmit = (e) => {
     e.preventDefault();
-    title || description || status || priority ? console.log("Task Added") : console.log("Please fill all the fields");
+    title || description || status || priority ? console.log(task) : console.log("Please fill all the fields");
   };
 
 
@@ -52,7 +52,7 @@ function TaskForm() {
           onChange={(e) => setDescription(e.target.value)}
         />
         {/* <button>Add Task</button> */}
-        <div className="gap-3 flex">
+        <div className="gap-3 flex ">
           <h1>Priority</h1>
           <h1>:</h1>
           <div className="">
@@ -75,7 +75,7 @@ function TaskForm() {
               id="Medium"
               onChange={handlePriorityChange}
             />
-            <label htmlFor="Medium" className="pl-1">
+            <label htmlFor=" Medium " className="pl-1">
               Medium
             </label>
           </div>
@@ -85,7 +85,7 @@ function TaskForm() {
               name="priority"
               value="Low"
               id="Low"
-              onChange={handleStatusChange}
+              onChange={handlePriorityChange}
             />
             <label htmlFor="Low" className="pl-1">
               Low
@@ -126,6 +126,7 @@ function TaskForm() {
               name="status"
               value="In Progress"
               id="In Progress"
+              onChange={handleStatusChange}
             />
             <label htmlFor="In Progress" className="pl-1">
               In Progress

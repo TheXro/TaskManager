@@ -1,10 +1,10 @@
 import React from "react";
 import { HiOutlineTrash } from "react-icons/hi2";
 function TaskItem({task , deleteTask}) {
-  console.log(task)
+  // console.log(task)
   return (
     <>
-      <div className="flex justify-between bg-white rounded-2xl p-4 my-4">
+      <div className="flex justify-between bg-white rounded-2xl p-4 my-4 border-2 shadow-[3px_3px_#000000]">
         <div className="flex text-xl gap-4 items-center justify-center">
           {task.title}
         </div>
